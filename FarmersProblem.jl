@@ -1,12 +1,12 @@
 #(This example refers to the Farmer's problem example, available in
-# Birge & Louveaux - Introduction to Stochastic Programming (1998), Chapter 1. 
+# Birge & Louveaux - Introduction to Stochastic Programming (1998), Chapter 1.
 #
-# created by: Fabricio Oliveira 
+# created by: Fabricio Oliveira
 
 using JuMP, Gurobi #I'm using Gurobi, but if not installed, just remove it from here...
 
 #... and use this instead
-#MyModel = Model() 
+#MyModel = Model()
 MyModel = Model(solver = GurobiSolver())
 
 ##Sets
@@ -18,7 +18,7 @@ NumRanges = length(Ranges)
 TotalScenarios = 3
 Scenarios = 1:TotalScenarios #set of scenarios s
 π = ones(TotalScenarios).*(1/TotalScenarios) #Scenario probabilities
-α = [0.8 1 1.2] #land production yield variation per scenario 
+α = [0.8 1 1.2] #land production yield variation per scenario
 
 ##Parameters
 L = 500 #acres of land available
