@@ -1,6 +1,6 @@
 #=
 Code for using Progressive Hedging in a 2-stage stochastic problem
-Created by: Fabricio on 25/11/2015
+Created by: Fabricio Oliveira on 25/11/2015
 =#
 
 using JuMP, Gurobi

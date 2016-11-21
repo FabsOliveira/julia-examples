@@ -1,4 +1,8 @@
-#Input initial data (hardcoded for now)
+#=
+Input initial data (hardcoded for now) and call ProgressiveHedging function
+Created by: Fabricio Oliveira on 25/11/2015
+=#
+
 
 c = [150 230 260]
 
