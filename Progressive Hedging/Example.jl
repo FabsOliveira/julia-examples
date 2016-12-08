@@ -6,7 +6,7 @@ Created by: Fabricio Oliveira on 25/11/2015
 
 c = [150 230 260]
 
-P = [0.25 0.5 0.25]
+P = [0.25 0.50 0.25]
 
 q = [238 210 -170 -150 -36 -10]
 
@@ -41,4 +41,7 @@ for s in 1:totalScenarios
 end
 
 include("ProgressiveHedging.jl")
-ProgressiveHedging(c,P,q,A,b,T,W,h,1)
+include("FrankWolfeProgressiveHedging.jl")
+
+tol_plot = ProgressiveHedging(c,P,q,A,b,T,W,h,1)
+tol_plot2 = FrankWolfeProgressiveHedging(c,P,q,A,b,T,W,h,ρ)

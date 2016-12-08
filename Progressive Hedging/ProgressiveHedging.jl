@@ -1,6 +1,6 @@
 #=
 Code for using Progressive Hedging in a 2-stage stochastic problem
-Created by: Fabricio Oliveira on 25/11/2015
+Created by: Fabricio Oliveira on 25/11/2016
 =#
 
 using JuMP, Gurobi
@@ -10,7 +10,7 @@ Problem's current standard format:
 
 Min c'x + \sum_{s \in S}P_s q' y_s
 s.t.: Ax <= b
-      Tx + W y <= h_s
+      Tx + Wy <= h_s
 =#
 
 function ProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
@@ -36,9 +36,10 @@ function ProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
 
    #If validation is required, turn this on
    validate = true
+   verbose = false
 
    if validate ==  true
-    detEqProblem = Model(solver = solver=GurobiSolver(OutputFlag = 0))
+    detEqProblem = Model(solver=GurobiSolver(OutputFlag = 0))
 
     @variable(detEqProblem, x[j in 1:dimX] >= 0) #creating x
     @variable(detEqProblem, y[j in 1:dimY, s in scenarios] >= 0) #creating y
@@ -98,7 +99,6 @@ function ProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
    while (Converged == false)
       k = k + 1
 
-      println("Iteration $k:")
       #Solve augmented subproblems for each scenario
       for s in scenarios
          augScenarioProblem = Model(solver=GurobiSolver(OutputFlag = 0))
@@ -138,17 +138,19 @@ function ProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
       end
 
       push!(tol_plot, tol)
-      println("Tolerance: $tol")
-      #Checking convergence
 
+      if verbose println("Iteration $k. Current tolerance: $tol") end
+
+      #Checking convergence
       if tol <= ϵ || k == kMax
          Converged = true
-         println("Algorithm converged in $k iterations with tolerance = ", tol)
+         println("Algorithm converged in $k iterations with tolerance = $tol")
       end
    end
 
    println("Final solution: ", x_bar)
-   if validate == true
-      println("Reference solution: ", x_ref)
-   end
+
+   if validate println("Reference solution: ", x_ref) end
+
+   return tol_plot
 end
