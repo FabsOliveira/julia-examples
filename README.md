@@ -1,10 +1,10 @@
 # julia-examples
 Examples of Julia implementations (mostly mathematical programming stuff)
 
-#Folders#
+##Folders##
 
-Problems: examples of models in general;
+<b>Problems</b>: examples of models in general;
 
-Progressive Hedging: simple implementation of the Progressive Hedging method. Has an example file to see how it works. 
+<b>Progressive Hedging</b>: simple implementation of the Progressive Hedging method. Has an example file to see how it works. 
 
-All codes available here a used for teaching purposes only. Feel free to fork and improve it.
+All codes available here a used for teaching purposes only and sometimes are written in "less optimised" fashion. Feel free to fork and help me improve it.
