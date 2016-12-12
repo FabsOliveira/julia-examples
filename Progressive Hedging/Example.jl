@@ -44,4 +44,4 @@ include("ProgressiveHedging.jl")
 include("FrankWolfeProgressiveHedging.jl")
 
 tol_plot = ProgressiveHedging(c,P,q,A,b,T,W,h,1)
-tol_plot2 = FrankWolfeProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
+tol_plot2 = FrankWolfeProgressiveHedging(c,P,q,A,b,T,W,h,1)

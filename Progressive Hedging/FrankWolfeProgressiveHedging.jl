@@ -85,7 +85,7 @@ function FrankWolfeProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
    Vx = x_scenarios
    Vy = y_scenarios
 
-   #calculating initial x_bar
+   #calculating initial x_bar (z)
    x_bar = P*x_scenarios'
 
    #calculating initial \omega
@@ -122,7 +122,6 @@ function FrankWolfeProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
 
          @objective(augLinSP, Min, sum{c[j]*x[j], j in 1:dimX} +
                          sum{ωHat[j,s]*x[j], j in 1:dimX} +
-                         #sum{(ρ/2)*((x[j] - x_bar[j])^2), j in 1:dimX} +
                          sum{q[j]*y[j], j in 1:dimY})
 
          solve(augLinSP)
@@ -163,6 +162,7 @@ function FrankWolfeProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
       end
 
       #Update x_bar
+      oldxBar = x_bar
       x_bar = P*x_scenarios'
 
       #update multipliers
@@ -174,7 +174,7 @@ function FrankWolfeProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
       #Calculating the reference tolerance parameter:
       tol = 0
       for s in scenarios
-         tol = tol + P[s]*norm(x_scenarios[:,s] - x_bar')
+         tol = tol + P[s]*norm(x_scenarios[:,s] - oldxBar')
       end
 
       push!(tol_plot, tol)
