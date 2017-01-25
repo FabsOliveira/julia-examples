@@ -196,7 +196,7 @@ function FrankWolfeProgressiveHedging(c,P,q,A,b,T,W,h,ρ)
    return tol_plot
 end
 
-#Auxiliary functions
+# Auxiliary functions
 function includeVertex(x, Vx, k::Int64, dimX::Int64, totalScenarios::Int64)
    flatVx = Vx[:]
    flatx = x[:]
